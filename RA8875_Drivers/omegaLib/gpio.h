@@ -26,9 +26,50 @@ enum GpioBitOrder {
     GBO_MSB_FIRST,
 };
 
-#define PinName int
-#define NC_PIN 0
+/* Pins definition */
+#define PinName uint8_t
 
+#define NC_PIN -1
+#define P0_PIN  0
+#define P1_PIN  1
+#define P2_PIN  2
+#define P3_PIN  3
+#define P4_PIN  4
+#define P5_PIN  5
+#define P6_PIN  6
+#define P7_PIN  7
+#define P8_PIN  8
+#define P9_PIN  9
+#define P11_PIN 11
+#define P12_PIN 12
+#define P13_PIN 13
+#define P15_PIN 15
+#define P16_PIN 16
+#define P17_PIN 17
+#define P18_PIN 18
+#define P19_PIN 19
+#define P45_PIN 45
+#define P46_PIN 46
+
+#define I2S_CLK_PIN P3_PIN
+#define I2S_WS_PIN  P2_PIN
+#define I2S_SDO_PIN P1_PIN
+#define I2S_SDI_PIN P0_PIN
+
+#define SERIAL_RX0_PIN P13_PIN
+#define SERIAL_TX0_PIN P12_PIN
+#define SERIAL_RX1_PIN P46_PIN
+#define SERIAL_TX1_PIN P45_PIN
+
+#define SPI_MISO_PIN P9_PIN
+#define SPI_MOSI_PIN P8_PIN
+#define SPI_CLK_PIN  P7_PIN
+#define SPI_CS_PIN   P6_PIN
+
+#define FW_RST_PIN P38_PIN
+
+#define I2C_SCL_PIN P4_PIN
+#define I2C_SDA_PIN P5_PIN
 
 class Gpio {
 
