@@ -1,8 +1,8 @@
-# RA8875_Driver_Omega2
+# RA8875_Driver_Omega2 SPI 4-Wire interface
 
 ## NON WORKING AT THE MOMENT 
 
-Porting MBED RA8875 controller drivers to C++ library for Onion Omega2.
+Porting MBED RA8875 controller drivers to C++ library for Onion Omega2 on SPI interface.
 Original code is provided by Mbed and STM32 boards code.
 
 Used code :
