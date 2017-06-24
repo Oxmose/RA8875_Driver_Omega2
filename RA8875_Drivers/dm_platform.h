@@ -11,7 +11,7 @@
 #define pulse_high(reg, _bitmask) do { *(reg) = 1; *(reg) = 0; } while(0)
 #define pulse_low(reg, _bitmask) do { *(reg) = 0; *(reg) = 1; } while(0)
 #define constrain(amt,low,high) ((amt)<=(low)?(low):((amt)>(high)?(high):(amt)))
-#define delay(ms) wait_ms(ms)
+#define delay(ms) usleep(ms * 1000)
 
 // On Arduino no extra delay is needed, but on faster platforms the simulated
 // SPI bus may get a too high frequency so a delay here will lower it. This
@@ -20,9 +20,7 @@
 
 // TODO CHECK HERE OMEGA 580Mhz
 #define slow_pulse_delay() do {\
-  usleep(20);\
-  volatile unsigned _xyz = 1000; \
-  for (; _xyz > 0; _xyz--); \
+  usleep(2);\
 } while(0)
 
 #define slow_pulse_high(reg, _bitmask) do {\

@@ -15,7 +15,7 @@
     RA8875Size size = RA8875_480x272 or RA8875Size size = RA8875_800x480;
 */
 
-#include "DmTftRa8875.h"
+#include "DmTftRA8875.h"
 
 DmTftRa8875::DmTftRa8875(uint8_t cs, uint8_t sel, uint8_t miso, uint8_t mosi, uint8_t clk)
     : DmTftBase(480, 272)

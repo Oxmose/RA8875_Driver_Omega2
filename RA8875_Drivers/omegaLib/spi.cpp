@@ -33,8 +33,28 @@ SPI::~SPI(void)
 
 void SPI::format(int bits, int mode /* = SPI_MODE_DEFAULT */)
 {
+	if(bits == 8)
+		bits = 0;
+
 	this->format_bits = bits;
-	this->format_mode = mode;
+
+	switch(mode)
+	{
+		case 0:
+			this->format_mode = SPI_MODE_0;
+			break;
+		case 1:
+			this->format_mode = SPI_MODE_1;
+			break;
+		case 2:
+			this->format_mode = SPI_MODE_2;
+			break;
+		case 3:
+			this->format_mode = SPI_MODE_3;
+			break;
+		default:
+			this->format_mode = SPI_MODE_0;			
+	}
 
 	this->initSeq |= FORMAT_INIT;
 
@@ -63,18 +83,26 @@ void SPI::init(void)
 	spiParamInit(&params);
 
 	params.speedInHz = frequency_hz;
-	params.bitsPerWord = (format_bits / 8) - 1;
+	params.bitsPerWord = format_bits;
 	params.mode = format_mode;
 	
 	params.sckGpio  = sclk;
 	params.mosiGpio = mosi;
 	params.misoGpio = miso;
-	params.csGpio   = ssel;
+	if(ssel != NC_PIN)
+		params.csGpio   = ssel;
+	else
+		params.modeBits = SPI_NO_CS;
+
+	std::cout << "PRAM MODE : " << params.modeBits << std::endl;
+
+	params.deviceId = 32766;
+	params.busNum = 1;
 
 	/* Check mapping */
-	if(spiCheckDevice(params.busNum, params.deviceId, ONION_SEVERITY_DEBUG_EXTRA) == EXIT_SUCCESS)
+	if(spiCheckDevice(params.busNum, params.deviceId, ONION_SEVERITY_DEBUG_EXTRA) != EXIT_SUCCESS)
 	{
-		std::cout << "[SPI INIT] Error: Spi device already mapped on bus and id mapped. Canceling Init." << std::endl;
+		std::cout << "[SPI INIT] Error: Spi device not mapped on bus. Canceling Init." << std::endl;
 		return;
 	}	
 
@@ -91,6 +119,8 @@ void SPI::init(void)
 		std::cout << "[SPI INIT] Error : Spi device setup failed. Canceling Init." << std::endl;
 		return;
 	}
+
+	std::cout << "SPI INIT OK" << std::endl;
 }
 
 int SPI::write(int value)

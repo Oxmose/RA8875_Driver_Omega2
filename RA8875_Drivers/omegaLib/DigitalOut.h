@@ -62,7 +62,7 @@ public:
      */
     DigitalOut(PinName pin, int value) {
 	/* Init GPIO system */
-	Gpio::initialize;
+	Gpio::initialize();
 
 	/* Set the pin direction out */
 	Gpio::pinMode(pin, GPD_OUTPUT);

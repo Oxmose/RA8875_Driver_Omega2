@@ -13,7 +13,8 @@
 #define DMTFTBASE_h
 
 #include "dm_platform.h"	
-
+#include "omegaLib/DigitalOut.h"
+#include <string>
 
 //Basic Colors
 #define RED     0xf800
@@ -76,7 +77,6 @@ public:
 protected:
   virtual void sendCommand(uint8_t index) = 0;
 
-  /* TODO : Digital out for Omega */
   DigitalOut* _pinCS;
   uint8_t _bitmaskCS;
 

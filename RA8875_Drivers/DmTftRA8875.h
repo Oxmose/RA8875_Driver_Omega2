@@ -14,6 +14,8 @@
 #define DM_TFT_RA8875_h
 
 #include "DmTftBase.h"
+#include "omegaLib/DigitalOut.h"
+#include "omegaLib/spi.h"
 
 enum RA8875Size {
     RA8875_480x272,
@@ -23,7 +25,7 @@ enum RA8875Size {
 class DmTftRa8875 : public DmTftBase
 {
 public:
-    DmTftRa8875(uint8_t cs, uint8_t sel, uint8_t miso, uint8_t mosi, uint8_t clk);
+    DmTftRa8875(uint8_t cs = SPI_CS_PIN, uint8_t sel = NC_PIN, uint8_t miso = SPI_MISO_PIN, uint8_t mosi = SPI_MOSI_PIN, uint8_t clk = SPI_CLK_PIN);
 
     virtual ~DmTftRa8875();
     virtual void init(); 
