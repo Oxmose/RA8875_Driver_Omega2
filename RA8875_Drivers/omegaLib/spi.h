@@ -12,7 +12,7 @@
 #define __SPI_H_
 
 #include "gpio.h"
-#include <onion-spi.h>
+#include "onion-spi.h"
 
 #define SPI_MODE_DEFAULT 0
 
@@ -28,6 +28,8 @@ class SPI
 		virtual int write(int value);
 
 	private:
+		void init(void);
+
 		PinName mosi;
 		PinName miso;
 		PinName sclk;

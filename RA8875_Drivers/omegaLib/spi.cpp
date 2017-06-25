@@ -17,7 +17,7 @@
 
 #define COMPLETE_INIT 0x07
 
-SPI::SPI(PinName mosi, PinName miso, PinName sclk, PinName ssel = NC_PIN)
+SPI::SPI(PinName mosi, PinName miso, PinName sclk, PinName ssel /* = NC_PIN */)
 {
 	/* Init members */
 	this->mosi = mosi;
@@ -31,7 +31,7 @@ SPI::~SPI(void)
 {
 }
 
-void SPI::format(int bits, int mode = SPI_MODE_DEFAULT)
+void SPI::format(int bits, int mode /* = SPI_MODE_DEFAULT */)
 {
 	this->format_bits = bits;
 	this->format_mode = mode;
@@ -44,7 +44,7 @@ void SPI::format(int bits, int mode = SPI_MODE_DEFAULT)
 		init();
 	}
 }
-void SPI::frequency(int hz = 1000000)
+void SPI::frequency(int hz /* = 1000000 */)
 {
 	this->frequency_hz = hz;
 
@@ -72,9 +72,9 @@ void SPI::init(void)
 	params.csGpio   = ssel;
 
 	/* Check mapping */
-	if(spiCheckDevice(params.busNum, params.devideId, ONION_SEVERITY_DEBUG_EXTRA) != EXIT_SUCCESS)
+	if(spiCheckDevice(params.busNum, params.deviceId, ONION_SEVERITY_DEBUG_EXTRA) == EXIT_SUCCESS)
 	{
-		std::cout << "[SPI INIT] Error: Spi device is not mapped. Canceling Init." << std::endl;
+		std::cout << "[SPI INIT] Error: Spi device already mapped on bus and id mapped. Canceling Init." << std::endl;
 		return;
 	}	
 
@@ -95,7 +95,7 @@ void SPI::init(void)
 
 int SPI::write(int value)
 {
-	if(initSeq != INIT_COMPLETE)
+	if(initSeq != COMPLETE_INIT)
 	{
 		std::cout << "[SPI WRITE] Error: SPI is not initialized." << std::endl;
 		return -1;
@@ -104,7 +104,7 @@ int SPI::write(int value)
 	uint8_t txBuffer = value;
 	uint8_t rxBuffer;
 	int status;
-	if((status = spiTranfer(&params, &txBuffer, &rxBuffer, 1)) != EXIT_SUCCESS)
+	if((status = spiTransfer(&params, &txBuffer, &rxBuffer, 1)) != EXIT_SUCCESS)
 	{
 		std::cout << "[SPI WRITE] Error : SPI write failed, code " << status << "." << std::endl;
 		return -1;
