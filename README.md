@@ -1,6 +1,6 @@
 # RA8875_Driver_Omega2 SPI 4-Wire interface
 
-## NON WORKING AT THE MOMENT 
+## NON WORKING AT THE MOMENT (the omega has some troubles with SPI)
 
 Porting MBED RA8875 controller drivers to C++ library for Onion Omega2 on SPI interface.
 Original code is provided by Mbed and STM32 boards code.
@@ -15,3 +15,5 @@ RA8875 driver lib : https://developer.mbed.org/users/displaymodule/code/dm_ra887
 
 The code provided in this repository have been ported to omega 2 architecture.
 The code was not originaly written by me, I just ported it.
+
+![Tft running on STM32F401](https://raw.githubusercontent.com/Oxmose/RA8875_Driver_Omega2/master/IMG_20170702_121141.jpg)
